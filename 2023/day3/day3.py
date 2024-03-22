@@ -30,12 +30,12 @@ def parseInput(inputFilePath: str) -> list:
 # @return: whether the specific table cell is surounded by a part sign or not
 #
 def isPart(table, row, col) -> bool:
-   for i in range(-1, 2, 1):
-      for j in range(-1, 2, 1):
-         if ((0 <= row + i < len(table)) and
-             (0 <= col + j < len(table[row + i])) and
-                 (table[row + i][col + j] != ".") and
-                 (table[row + i][col + j].isnumeric() == False)):
+   for idx in range(-1, 2, 1):
+      for jdx in range(-1, 2, 1):
+         if ((0 <= row + idx < len(table)) and
+             (0 <= col + jdx < len(table[row + idx])) and
+                 (table[row + idx][col + jdx] != ".") and
+                 (table[row + idx][col + jdx].isnumeric() == False)):
             return True
    return False
 
