@@ -723,20 +723,20 @@ count = 0
 idx = 0
 end = False
 while False == end:
-    count += 1
-    if directions[idx] == "L":
-        for i in range(6):
-            locations[i] = map[locations[i]][0]
-    else:
-        for i in range(6):
-            locations[i] = map[locations[i]][1]
-    # print(str(locations[0][2]) + str(locations[1][2]) + str(locations[2][2]) + str(locations[3][2]) + str(locations[4][2]) + str(locations[5][2]) )
-    # print(str(count))
-    # if locations[0][2] == "Z" and locations[1][2] == "Z" and locations[2][2] == "Z" and locations[3][2] == "Z" and locations[4][2] == "Z" and locations[5][2] == "Z":
-    if locations[5][2] == "Z":
-        end = True
-        print(str(locations[5] + " " + str(count) + " " +  str(idx)))
-    idx += 1
-    if idx == (len(directions)):
-        idx = 0
+   count += 1
+   if directions[idx] == "L":
+      for i in range(6):
+         locations[i] = map[locations[i]][0]
+   else:
+      for i in range(6):
+         locations[i] = map[locations[i]][1]
+   # print(str(locations[0][2]) + str(locations[1][2]) + str(locations[2][2]) + str(locations[3][2]) + str(locations[4][2]) + str(locations[5][2]) )
+   # print(str(count))
+   # if locations[0][2] == "Z" and locations[1][2] == "Z" and locations[2][2] == "Z" and locations[3][2] == "Z" and locations[4][2] == "Z" and locations[5][2] == "Z":
+   if locations[5][2] == "Z":
+      end = True
+      print(str(locations[5] + " " + str(count) + " " + str(idx)))
+   idx += 1
+   if idx == (len(directions)):
+      idx = 0
 print(count)
