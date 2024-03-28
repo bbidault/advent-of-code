@@ -1,8 +1,7 @@
 # https://adventofcode.com/2023/day/2
 
 
-##
-# Calculates and returns the sum of ids of game that respects the rule of maximum 12 red, 13 green and 13 blue cubes
+## Calculates and returns the sum of ids of game that respects the rule of maximum 12 red, 13 green and 13 blue cubes
 #
 # @param inputFilePath: the input file
 # @return the sum of ids of game that respects the rule of maximum 12 red, 13 green and 13 blue cubes
@@ -26,8 +25,7 @@ def part1(inputFilePath: str) -> int:
    return sum
 
 
-##
-# Calculates and returns the sum of the products of minimum required red, green and blue cubes for the game to be valid
+## Calculates and returns the sum of the products of minimum required red, green and blue cubes for the game to be valid
 #
 # @param inputFilePath: the input file
 # @return: the sum of the products of minimum required red, green and blue cubes for the game to be valid

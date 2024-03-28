@@ -1,8 +1,7 @@
 # https://adventofcode.com/2023/day/3
 
 
-##
-# Parse the input file data into a table
+## Parse the input file data into a table
 #
 # @param inputFilePath: the input file
 # @return: the input data in a table
@@ -21,8 +20,7 @@ def parseInput(inputFilePath: str) -> list:
    return table
 
 
-##
-# Identify whether the specific table cell is surounded by a part sign or not
+## Identify whether the specific table cell is surounded by a part sign or not
 #
 # @param table: the table representing the parts schematics
 # @param row: the row number of the cell of interest
@@ -40,8 +38,7 @@ def isPart(table, row, col) -> bool:
    return False
 
 
-##
-# Get a full part number given the one of the table cell the number
+## Get a full part number given the one of the table cell the number
 #
 # @param table: the table representing the parts schematics
 # @param row: the row number of the cell of interest
@@ -67,8 +64,7 @@ def getNum(table, row, col) -> int:
    return hundreds * 100 + tens * 10 + units
 
 
-##
-# Calculates and returns the sum of the parts number in the input file
+## Calculates and returns the sum of the parts number in the input file
 #
 # @param inputFilePath: the input file
 # @return: the sum of the parts number in the input file
@@ -88,8 +84,7 @@ def part1(inputFilePath: str) -> int:
    return sum
 
 
-##
-# Calculates and returns the sum of the gear ratios of all gears (*) in the input file
+## Calculates and returns the sum of the gear ratios of all gears (*) in the input file
 #
 # @param inputFilePath: the input file
 # @return: the sum of the gear ratios of all gears (*) in the input file

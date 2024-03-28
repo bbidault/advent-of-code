@@ -1,8 +1,7 @@
 # https://adventofcode.com/2023/day/4
 
 
-##
-# Parse the input and return a list of winning and matching numbers
+## Parse the input and return a list of winning and matching numbers
 #
 # @param inputLine: a single input line
 # @return: a list of winning and matching numbers
@@ -16,8 +15,7 @@ def parseInput(inputLine: str) -> tuple:
    return (wNum, mNum)
 
 
-##
-# Calculate the total score using the rule that the first matching pair gives 1 point and each following matching number doubles the points
+## Calculate the total score using the rule that the first matching pair gives 1 point and each following matching number doubles the points
 #
 # @param inputFilePath: the input file
 # @return: the total score using the rule that the first matching pair gives 1 point and each following matching number doubles the points
@@ -40,8 +38,7 @@ def part1(inputFilePath: str) -> int:
    return sum
 
 
-##
-# Calculate the total number of won cards using the rule that each cards gives one of each next n card for n matching numbers
+## Calculate the total number of won cards using the rule that each cards gives one of each next n card for n matching numbers
 #
 # @param inputFilePath: the input file
 # @return: the total number of won cards using the rule that each cards gives one of each next n card for n matching numbers

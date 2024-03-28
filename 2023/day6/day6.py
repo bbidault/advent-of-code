@@ -3,8 +3,7 @@
 import math
 
 
-##
-# Solve returns the solution(s) of a quadratic equation written as a * x^2 + b * x + c = 0
+## Solve returns the solution(s) of a quadratic equation written as a * x^2 + b * x + c = 0
 #
 # @param a: second degree coefficient
 # @param b: first degree coefficient
@@ -23,8 +22,7 @@ def solve(a: int, b: int, c: int) -> list:
    return solutions
 
 
-##
-# Computes the product of the numbers of valid solutions to win each race,
+## Computes the product of the numbers of valid solutions to win each race
 # the "solutions" are the the number of seconds to press the "speed" buton before releasing
 #
 # @param inputs: the race details

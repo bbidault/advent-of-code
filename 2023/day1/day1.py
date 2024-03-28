@@ -3,8 +3,7 @@
 import sys
 
 
-##
-# Compute the sum of numbers made from the first and last instance of keyword numbers in the given input
+## Compute the sum of numbers made from the first and last instance of keyword numbers in the given input
 #
 # @param inputFilePath: the input file
 # @param keywords: The keyword to search within the input words

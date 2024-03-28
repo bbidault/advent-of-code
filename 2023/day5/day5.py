@@ -3,13 +3,11 @@
 import sys
 
 
-##
-# The Map class defines the mapping of a range to another.
+## The Map class defines the mapping of a range to another.
 #
 class Map:
 
-   ##
-   # Constructor for a Map given a set of range numbers
+   ## Constructor for a Map given a set of range numbers
    #
    # @param numbers: the target range begin, source range begin and size of the range
    #
@@ -22,8 +20,7 @@ class Map:
          self.source.append(numbers[location * 3 + 1])
          self.range.append(numbers[location * 3 + 2])
 
-   ##
-   # Translate a given number through the Map, source to target
+   ## Translate a given number through the Map, source to target
    #
    # @param seed: a number to translate
    # @return: the translated number
@@ -34,8 +31,7 @@ class Map:
             return seed - self.source[location] + self.target[location]
       return seed
 
-   ##
-   # Translate a given number through the Map, target to source
+   ## Translate a given number through the Map, target to source
    #
    # @param seed: a number to translate back
    # @return: the translated number
@@ -47,8 +43,7 @@ class Map:
       return seed
 
 
-##
-# Find the seed with the closest (smallest) location in a list of seeds
+## Find the seed with the closest (smallest) location in a list of seeds
 #
 # @return: the seed with the closest (smallest) location
 #
@@ -67,8 +62,7 @@ def part1() -> int:
    return answer
 
 
-##
-# Find the closest (smallest) location in which to plant a seed
+## Find the closest (smallest) location in which to plant a seed
 #
 # @return: the closest (smallest) location in which to plant a seed
 #
