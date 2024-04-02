@@ -2,7 +2,8 @@
 
 import math
 
-## Evaluates the given hand
+
+# Evaluates the given hand
 #
 # @param hand: the hand to evaluate
 # @param part1: whether we should evaluate the hand with the rules of part 1 (True) or part 2 (False)
@@ -27,7 +28,7 @@ def evaluate(hand: list, part1: bool) -> int:
    isThreeOfKind = False
    isTwoPair = False
    isPair = False
-   isHighCard = part1 or buckets[0] > 0 # cannot have a high card case if we are using part 2 rules and there is a joker (bucket[0])
+   isHighCard = part1 or buckets[0] > 0  # cannot have a high card case if we are using part 2 rules and there is a joker (bucket[0])
 
    # evaluate high card case (every cards label are distinct)
    if isHighCard:
@@ -37,7 +38,7 @@ def evaluate(hand: list, part1: bool) -> int:
             break
 
    # evaluate case where two or more cards are not distinct
-   if False == isHighCard:
+   if not isHighCard:
       rangeBegin = 0 if part1 else 1
       for idx in range(rangeBegin, 13):
          if buckets[idx] == 5:
@@ -63,7 +64,7 @@ def evaluate(hand: list, part1: bool) -> int:
                isPair = True
 
    # consider jockers (buckets[0]) in part 2
-   if False == part1:
+   if not part1:
       for idx in range(buckets[0]):
          if isFourOfKind:
             isFourOfKind = False
@@ -83,33 +84,33 @@ def evaluate(hand: list, part1: bool) -> int:
          else:
             isPair = True
 
-   # calculate the final score of the hand, since each card can take 13 values, 
+   # calculate the final score of the hand, since each card can take 13 values,
    # we multiply each evaluation step score by a decreasing powers of 13
    score = 0
    if isFiveOfKind:
-      score =  7
+      score = 7
    elif isFourOfKind:
-      score =  6
+      score = 6
    elif isFullHouse:
-      score =  5
+      score = 5
    elif isThreeOfKind:
-      score =  4
+      score = 4
    elif isTwoPair:
-      score =  3
+      score = 3
    elif isPair:
-      score =  2
+      score = 2
    elif isHighCard:
       score = 1
 
-   score *= math.pow(13,5)
-   score += (scoreSigns.find(hand[0]) * math.pow(13,4) + scoreSigns.find(hand[1]) * math.pow(13,3) + 
-             scoreSigns.find(hand[2]) * math.pow(13,2) + scoreSigns.find(hand[3]) * math.pow(13,1) + 
-             scoreSigns.find(hand[4]) )
+   score *= math.pow(13, 5)
+   score += (scoreSigns.find(hand[0]) * math.pow(13, 4) + scoreSigns.find(hand[1]) * math.pow(13, 3) +
+             scoreSigns.find(hand[2]) * math.pow(13, 2) + scoreSigns.find(hand[3]) * math.pow(13, 1) +
+             scoreSigns.find(hand[4]))
 
    return score
 
 
-## Sum the bid time ranking of each hands
+# Sum the bid time ranking of each hands
 #
 # @param inputFilePath: the input file
 # @param part1: whether we should evaluate the hand with the rules of part 1 (True) or part 2 (False)
