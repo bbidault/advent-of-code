@@ -1,131 +1,77 @@
-import sys
-import copy
-
-sys.setrecursionlimit(100000000)
+# https://adventofcode.com/2023/day/21
 
 
-maxSteps = 327
+# Ingest the given input into a table representing the gardens (maxSteps + 1) and rocks (-1)
+# The output table captures 5 * 5 the input to enables walks of up to 327 steps for part 2
+#
+# @param inputFilePath: the input file
+# @param maxSteps: the max number of steps this table will be used for
+# @return: a table representing 5 * 5 input tables with numbers
+#
+def ingest(inputFilePath: str, maxSteps: int) -> list:
+   inputFile = open(inputFilePath, "r")
+   lines = inputFile.readlines()
+   inputFile.close()
+   lenInputTable = len(lines)
+   table = [[-1] * lenInputTable * 5 for _ in range(lenInputTable * 5)]  # create a large table that includes 5 * 5 input tables
+   for i in range(lenInputTable * 5):
+      for j in range(lenInputTable * 5):
+         if lines[i % lenInputTable][j % lenInputTable] in ".S":
+            table[i][j] = maxSteps + 1
+   return table
 
-inputFile = open("input.txt", "r")
-lines = inputFile.readlines()
-table = []
-for i in range(len(lines)):
-   subtable = []
-   for j in range(len(lines[i])):
-      if lines[i][j] == "#":
-         subtable.append(-1)
-      elif lines[i][j] == ".":
-         subtable.append(maxSteps + 1)
-   table.append(subtable)
 
-
-def recurse(loc, steps, amaxSteps, tableCopy, num):
+# Calculate and return the number of garden cells that can be reached from the given location
+# with the number of steps walked and the total number of steps to walk as constraints.
+#
+# @param loc: the location in the map
+# @param steps: the number of walked steps
+# @param maxSteps: the total number of steps for this walk
+# @param table: the map of gardens and rocks
+# @return: the number of garden cells that can be reached from the given location
+#
+def recurse(loc: tuple, steps: int, maxSteps: int, table: list) -> int:
    sum = 0
-   if ((steps <= amaxSteps) and
-       (loc[0] < len(tableCopy)) and
-       (loc[0] >= 0) and
-       (loc[1] < len(tableCopy[0])) and
-       (loc[1] >= 0) and
-           (tableCopy[loc[0]][loc[1]] > steps)):
-      if tableCopy[loc[0]][loc[1]] == (maxSteps + 1) and (loc[0] + loc[1]) % 2 == num:
+   row, col = loc
+   if ((steps <= maxSteps) and (row < len(table)) and (row >= 0) and (col < len(table[0])) and (col >= 0) and (table[row][col] > steps)):
+      if table[row][col] == (maxSteps + 1) and (row + col) % 2 == (maxSteps % 2):
          sum = 1
-      tableCopy[loc[0]][loc[1]] = steps
-      sum += recurse((loc[0] + 1, loc[1]), steps + 1, amaxSteps, tableCopy, num)
-      sum += recurse((loc[0] - 1, loc[1]), steps + 1, amaxSteps, tableCopy, num)
-      sum += recurse((loc[0], loc[1] + 1), steps + 1, amaxSteps, tableCopy, num)
-      sum += recurse((loc[0], loc[1] - 1), steps + 1, amaxSteps, tableCopy, num)
+      table[row][col] = steps
+      sum += recurse((row + 1, col), steps + 1, maxSteps, table)
+      sum += recurse((row - 1, col), steps + 1, maxSteps, table)
+      sum += recurse((row, col + 1), steps + 1, maxSteps, table)
+      sum += recurse((row, col - 1), steps + 1, maxSteps, table)
    return sum
 
 
-def sign(a: int):
-   if a < 0:
-      return -1
-   return 1
-
-# maps = [(0, 0, 0)]
-# toVisit = []
-
-# def visit(row, col, steps):
-#     print(str(row) + " " + str(col) + " " + str(steps))
-#     if steps + 1 < totalSteps:
-#         maps.append((row, col, steps))
-#         if abs(row) > abs(col):
-#             toVisit.append((row + sign(row), col, steps + 130))
-#         elif abs(row) < abs(col):
-#             toVisit.append((row, col + sign(col), steps + 130))
-#         else:
-#             toVisit.append((row + sign(row), col, steps + 195))
-#             toVisit.append((row, col + sign(col), steps + 195))
-#             toVisit.append((row + sign(row), col + sign(col), steps + 230))
-
-# toVisit.append((1, 0, 65))
-# toVisit.append((1, 1, 130))
-# toVisit.append((0, 1, 65))
-# toVisit.append((-1, 1, 130))
-# toVisit.append((-1, 0, 65))
-# toVisit.append((-1, -1, 130))
-# toVisit.append((0, -1, 65))
-# toVisit.append((1, -1, 130))
-# while toVisit:
-#     row, col, steps = toVisit.pop(0)
-#     visit(row, col, steps)
+# Calculate and return the number of garden cells that can be reached in 64 steps
+#
+# @param inputFilePath: the input file
+# @return: the number of garden cells that can be reached in 64 steps
+#
+def part1(inputFilePath: str) -> int:
+   return recurse((327, 327), 0, 64, ingest(inputFilePath, 64))
 
 
-startLoc = (327, 327)
-print(recurse(startLoc, 0, 65, copy.deepcopy(table), 1))
-print(recurse(startLoc, 0, 196, copy.deepcopy(table), 0))
-print(recurse(startLoc, 0, 327, copy.deepcopy(table), 1))
+# Calculate and return the number of garden cells that can be reached in 26501365 steps by using Lagrange interpolation
+#
+# @param inputFilePath: the input file
+# @return: the number of garden cells that can be reached in 26501365 steps
+#
+def part2(inputFilePath: str) -> int:
+   # using Lagrange interpolation with
+   x0 = 65
+   y0 = recurse((327, 327), 0, x0, ingest(inputFilePath, x0))
+   x1 = 196
+   y1 = recurse((327, 327), 0, x1, ingest(inputFilePath, x1))
+   x2 = 327
+   y2 = recurse((327, 327), 0, x2, ingest(inputFilePath, x2))
+   x = 26501365
 
-# for i in range(len(table)):
-#     for j in range(len(table[i])):
-#         if table[i][j] == -1:
-#             print("#", end="")
-#         elif table[i][j] < (maxSteps + 1):
-#             if table[i][j]%2 == 0:
-#                 answer += 1
-#                 print("+", end="")
-#             else:
-#                 print(".", end="")
-#         else:
-#             print(".", end="")
-#     print()
+   return (((x - x1) * (x - x2) / ((x0 - x1) * (x0 - x2))) * y0 +
+           ((x - x0) * (x - x2) / ((x1 - x0) * (x1 - x2))) * y1 +
+           ((x - x0) * (x - x1) / ((x2 - x0) * (x2 - x1))) * y2)
 
-# visitableGardens1 = 7791 #15579 #7791 #7787
-# visitableGardens2 = 7787
-# totalSteps = 26501365
-# stepsLeftAtTip = (totalSteps - 65)%131
-# # print("stepsLeftAtTip " + str(stepsLeftAtTip))
-# fullSquareToBorder = int((totalSteps - 65)/131) - 1
-# print("fullSquareToBorder " + str(fullSquareToBorder))
 
-# answer = (visitableGardens1 + # square 0 0
-#          ((fullSquareToBorder+1)/2) * visitableGardens2 * 4 + # full squares
-#          ((fullSquareToBorder-1)/2) * visitableGardens1 * 4 + # full squares
-#          (fullSquareToBorder - 2) * (fullSquareToBorder - 2) * (visitableGardens1 + visitableGardens2) + (fullSquareToBorder - 1) * visitableGardens1 * 4 + # full squares
-#          recurse((0, 65), 0, stepsLeftAtTip, copy.deepcopy(table), 0) + # southern tip
-#          recurse((1, 65), 0, stepsLeftAtTip + 131, copy.deepcopy(table), 1) + # southern tip
-#          recurse((131, 65), 0, stepsLeftAtTip, copy.deepcopy(table), 0) + # northern tip
-#          recurse((130, 65), 0, stepsLeftAtTip + 131, copy.deepcopy(table), 1) + # northern tip
-#          recurse((65, 0), 0, stepsLeftAtTip, copy.deepcopy(table), 0) + # eastern tip
-#          recurse((65, 1), 0, stepsLeftAtTip + 131, copy.deepcopy(table), 1) + # eastern tip
-#          recurse((65, 131), 0, stepsLeftAtTip, copy.deepcopy(table), 0) + # western tip
-#          recurse((65, 130), 0, stepsLeftAtTip + 131, copy.deepcopy(table), 1) + # western tip
-#          ((fullSquareToBorder + 1)/2) * recurse((0, 0), 0, stepsLeftAtTip + 131 - 65, copy.deepcopy(table), 0) +  # south eastern side
-#          ((fullSquareToBorder - 1)/2) * recurse((1, 0), 0, stepsLeftAtTip + 131 + 65, copy.deepcopy(table), 1) +  # south eastern side
-#          ((fullSquareToBorder + 1)/2) * recurse((131, 0), 0, stepsLeftAtTip + 131 - 65, copy.deepcopy(table), 0) +  # north eastern side
-#          ((fullSquareToBorder - 1)/2) * recurse((130, 0), 0, stepsLeftAtTip + 131 + 65, copy.deepcopy(table), 1) +  # north eastern side
-#          ((fullSquareToBorder + 1)/2) * recurse((131, 131), 0, stepsLeftAtTip + 131 - 65, copy.deepcopy(table), 0) +  # north western side
-#          ((fullSquareToBorder - 1)/2) * recurse((130, 131), 0, stepsLeftAtTip + 131 + 65, copy.deepcopy(table), 1) +  # north western side
-#          ((fullSquareToBorder + 1)/2) * recurse((0, 131), 0, stepsLeftAtTip + 131 - 65, copy.deepcopy(table), 0) +  # south western side
-#          ((fullSquareToBorder - 1)/2) * recurse((0, 130), 0, stepsLeftAtTip + 131 + 65, copy.deepcopy(table), 1) # south western side
-# )
-
-# print(answer)
-
-n = (26501365 - 65) // 131
-a = (97645 - (2 * 35223) + 3957) // 2
-b = 35223 - 3957 - a
-c = 3957
-print((a * n**2) + (b * n) + c)
-
-inputFile.close()
+print("Part 1 solution:", part1("input.txt"))
+print("Part 2 solution:", part2("input.txt"))
