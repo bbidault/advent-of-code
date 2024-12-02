@@ -1,0 +1,20 @@
+{
+    "name": "AoC2024",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+	"extensions": [
+		"zachflower.uncrustify",
+	],
+	"customizations": {
+		 "vscode": {
+			  "settings": {
+					"uncrustify.configPath.linux": "uncrustify.cfg",
+					"editor.defaultFormatter": "zachflower.uncrustify",
+					"uncrustify.useReplaceOption": true,
+					"editor.formatOnSave": true
+			  }
+		 }
+	}
+}
