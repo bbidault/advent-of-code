@@ -3,3 +3,4 @@
 build/
 *input*.txt
 settings.json
+uncrustify.cfg
