@@ -58,13 +58,16 @@ int compute( const std::string aInputFilePath, const bool aPart1 )
 /**
  * @brief Main function
  *
+ * @param argc number of argument(s)
+ * @param argv the argument(s)
  * @return int exit code
  */
-int main()
+int main( int argc, char *argv[] )
 {
-   printf( "Part 1 test: %d\n", compute( "../test_input.txt", true ) );
-   printf( "Part 1 solution: %d\n", compute( "../input.txt", true ) );
-   printf( "Part 2 test: %d\n", compute( "../test_input.txt", false ) );
-   printf( "Part 2 solution: %d\n", compute( "../input.txt", false ) );
+   if ( argc == 2 )
+   {
+      printf( "Part 1 solution: %d\n", compute( argv[1], true ) );
+      printf( "Part 2 solution: %d\n", compute( argv[1], false ) );
+   }
    return 0;
 }
