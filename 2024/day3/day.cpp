@@ -1,9 +1,7 @@
 // https://adventofcode.com/2024/day/3
 
-#include <iostream>
 #include <fstream>
 #include <regex>
-#include <sstream>
 
 /**
  * @brief Sum the product of the two numbers in a regular expression of the form "mul\(\d{1,3},\d{1,3}\)".
