@@ -10,9 +10,9 @@
  *
  * @param aNumber a number
  * @param aOtherNumber an other number
- * @return double the resulting concatenated number
+ * @return int64_t the resulting concatenated number
  */
-double concatenate( const double aNumber, const double aOtherNumber )
+int64_t concatenate( const int64_t aNumber, const int64_t aOtherNumber )
 {
    return aNumber * pow( 10, floor( log10( aOtherNumber ) + 1 ) ) + aOtherNumber;
 }
@@ -29,8 +29,8 @@ double concatenate( const double aNumber, const double aOtherNumber )
   *              multiplication ad concatenation)
  * @return int the number of operator combinations that leads the equation to equate the given final result.
  */
-int calculate( const double           aFinalResult,
-               const double           aRunningResult,
+int calculate( const int64_t          aFinalResult,
+               const int64_t          aRunningResult,
                const std::vector<int> &aConstants,
                const int              aStep,
                const bool             aPart2 )
@@ -62,11 +62,11 @@ int calculate( const double           aFinalResult,
  *
  * @param aInputFilePath the input file
  * @param aPart2 whether we are solving part 1 (false) or part 2 (true)
- * @return double the sum of the results of the given equations that have a valid solution
+ * @return int64_t the sum of the results of the given equations that have a valid solution
  */
-double compute( const std::string aInputFilePath, const bool aPart2 )
+int64_t compute( const std::string aInputFilePath, const bool aPart2 )
 {
-   double sum = 0;
+   int64_t sum = 0;
    std::ifstream inputFile( aInputFilePath );
    if ( inputFile.is_open() )
    {
@@ -81,7 +81,7 @@ double compute( const std::string aInputFilePath, const bool aPart2 )
             equation.push_back( numbers );
          }
 
-         double result = std::stod( equation[0] ); // the result of the equation
+         int64_t result = std::stod( equation[0] ); // the result of the equation
 
          ss = std::stringstream( equation[1] );
          std::vector<int> constants;
@@ -117,8 +117,8 @@ int main( int argc, char *argv[] )
 {
    if ( argc == 2 )
    {
-      printf( "Part 1 solution: %f\n", compute( argv[1], false ) );
-      printf( "Part 2 solution: %f\n", compute( argv[1], true ) );
+      printf( "Part 1 solution: %ld\n", compute( argv[1], false ) );
+      printf( "Part 2 solution: %ld\n", compute( argv[1], true ) );
    }
 
    return 0;
