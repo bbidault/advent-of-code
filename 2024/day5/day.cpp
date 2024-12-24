@@ -44,7 +44,7 @@ std::vector<int> getTopologicalPages( std::vector<std::pair<int, int> > aTreeEdg
 
 /**
  * @brief For part 1, sum the mid page numbers of valid manuals (pages meet topological order defined by the given tree).
- *        For part 1, sum the mid page numbers of invalid manuals.
+ *        For part 2, sum the mid page numbers of invalid manuals.
  *
  * @param aInputFilePath the input file
  * @param aPart1 whether we are solving part 1 (true) or part 2 (false)
