@@ -32,80 +32,80 @@ struct Cell
  * @param aX a location of interest x coordinate
  * @param aY a location of interest y coordinate
  * @param aHeading the current heading for the recursive depth
- * @param score the current score for the recursive depth
+ * @param aScore the current score for the recursive depth
  * @param aScoreMap a map of scores for each cell and heading
  */
 void visit( const std::vector<std::string>  &aMap,
             const int                       aX,
             const int                       aY,
             const std::string               &aHeading,
-            const int                       score,
+            const int                       aScore,
             std::vector<std::vector<Cell> > &aScoreMap )
 {
    bool continueVisit = true;
    // update the score for the current location, only if the new score is better
-   if ( ( aHeading == "north" ) && ( aScoreMap[aX][aY].mNorthScore > score ) )
+   if ( ( aHeading == "north" ) && ( aScoreMap[aX][aY].mNorthScore > aScore ) )
    {
-      aScoreMap[aX][aY].mNorthScore = score;
-      if ( aScoreMap[aX][aY].mSouthScore > score + 2000 ) // full 180 degrees turn adds 2000 points to the score
+      aScoreMap[aX][aY].mNorthScore = aScore;
+      if ( aScoreMap[aX][aY].mSouthScore > aScore + 2000 ) // full 180 degrees turn adds 2000 points to the score
       {
-         aScoreMap[aX][aY].mSouthScore = score + 2000;
+         aScoreMap[aX][aY].mSouthScore = aScore + 2000;
       }
-      if ( aScoreMap[aX][aY].mEastScore > score + 1000 ) // 90 degrees turn adds 1000 points to the score
+      if ( aScoreMap[aX][aY].mEastScore > aScore + 1000 ) // 90 degrees turn adds 1000 points to the score
       {
-         aScoreMap[aX][aY].mEastScore = score + 1000;
+         aScoreMap[aX][aY].mEastScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mWestScore > score + 1000 )
+      if ( aScoreMap[aX][aY].mWestScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mWestScore = score + 1000;
+         aScoreMap[aX][aY].mWestScore = aScore + 1000;
       }
    }
-   else if ( ( aHeading == "south" ) && ( aScoreMap[aX][aY].mSouthScore > score ) )
+   else if ( ( aHeading == "south" ) && ( aScoreMap[aX][aY].mSouthScore > aScore ) )
    {
-      aScoreMap[aX][aY].mSouthScore = score;
-      if ( aScoreMap[aX][aY].mNorthScore > score + 2000 )
+      aScoreMap[aX][aY].mSouthScore = aScore;
+      if ( aScoreMap[aX][aY].mNorthScore > aScore + 2000 )
       {
-         aScoreMap[aX][aY].mNorthScore = score + 2000;
+         aScoreMap[aX][aY].mNorthScore = aScore + 2000;
       }
-      if ( aScoreMap[aX][aY].mEastScore > score + 1000 )
+      if ( aScoreMap[aX][aY].mEastScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mEastScore = score + 1000;
+         aScoreMap[aX][aY].mEastScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mWestScore > score + 1000 )
+      if ( aScoreMap[aX][aY].mWestScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mWestScore = score + 1000;
+         aScoreMap[aX][aY].mWestScore = aScore + 1000;
       }
    }
-   else if ( ( aHeading == "east" ) && ( aScoreMap[aX][aY].mEastScore > score ) )
+   else if ( ( aHeading == "east" ) && ( aScoreMap[aX][aY].mEastScore > aScore ) )
    {
-      aScoreMap[aX][aY].mEastScore = score;
-      if ( aScoreMap[aX][aY].mNorthScore > score + 1000 )
+      aScoreMap[aX][aY].mEastScore = aScore;
+      if ( aScoreMap[aX][aY].mNorthScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mNorthScore = score + 1000;
+         aScoreMap[aX][aY].mNorthScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mSouthScore > score + 1000 )
+      if ( aScoreMap[aX][aY].mSouthScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mSouthScore = score + 1000;
+         aScoreMap[aX][aY].mSouthScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mWestScore > score + 2000 )
+      if ( aScoreMap[aX][aY].mWestScore > aScore + 2000 )
       {
-         aScoreMap[aX][aY].mWestScore = score + 2000;
+         aScoreMap[aX][aY].mWestScore = aScore + 2000;
       }
    }
-   else if ( ( aHeading == "west" ) && ( aScoreMap[aX][aY].mWestScore > score ) )
+   else if ( ( aHeading == "west" ) && ( aScoreMap[aX][aY].mWestScore > aScore ) )
    {
-      aScoreMap[aX][aY].mWestScore = score;
-      if ( aScoreMap[aX][aY].mNorthScore > score + 1000 )
+      aScoreMap[aX][aY].mWestScore = aScore;
+      if ( aScoreMap[aX][aY].mNorthScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mNorthScore = score + 1000;
+         aScoreMap[aX][aY].mNorthScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mSouthScore > score + 1000 )
+      if ( aScoreMap[aX][aY].mSouthScore > aScore + 1000 )
       {
-         aScoreMap[aX][aY].mSouthScore = score + 1000;
+         aScoreMap[aX][aY].mSouthScore = aScore + 1000;
       }
-      if ( aScoreMap[aX][aY].mEastScore > score + 2000 )
+      if ( aScoreMap[aX][aY].mEastScore > aScore + 2000 )
       {
-         aScoreMap[aX][aY].mEastScore = score + 2000;
+         aScoreMap[aX][aY].mEastScore = aScore + 2000;
       }
    }
    else
@@ -124,45 +124,45 @@ void visit( const std::vector<std::string>  &aMap,
          if ( aHeading == "south" )
          {
             // if the heading does not change, add +1 to the score
-            visit( aMap, aX + 1, aY, "south", score + 1, aScoreMap );
+            visit( aMap, aX + 1, aY, "south", aScore + 1, aScoreMap );
          }
          else
          {
             // otherwise, add +1000 for the change of heading +1 for the step forward
-            visit( aMap, aX + 1, aY, "south", score + 1001, aScoreMap );
+            visit( aMap, aX + 1, aY, "south", aScore + 1001, aScoreMap );
          }
       }
       if ( ( aMap[aX - 1][aY] != '#' ) && ( aHeading != "south" ) )
       {
          if ( aHeading == "north" )
          {
-            visit( aMap, aX - 1, aY, "north", score + 1, aScoreMap );
+            visit( aMap, aX - 1, aY, "north", aScore + 1, aScoreMap );
          }
          else
          {
-            visit( aMap, aX - 1, aY, "north", score + 1001, aScoreMap );
+            visit( aMap, aX - 1, aY, "north", aScore + 1001, aScoreMap );
          }
       }
       if ( ( aMap[aX][aY + 1] != '#' ) && ( aHeading != "west" ) )
       {
          if ( aHeading == "east" )
          {
-            visit( aMap, aX, aY + 1, "east", score + 1, aScoreMap );
+            visit( aMap, aX, aY + 1, "east", aScore + 1, aScoreMap );
          }
          else
          {
-            visit( aMap, aX, aY + 1, "east", score + 1001, aScoreMap );
+            visit( aMap, aX, aY + 1, "east", aScore + 1001, aScoreMap );
          }
       }
       if ( ( aMap[aX][aY - 1] != '#' ) && ( aHeading != "east" ) )
       {
          if ( aHeading == "west" )
          {
-            visit( aMap, aX, aY - 1, "west", score + 1, aScoreMap );
+            visit( aMap, aX, aY - 1, "west", aScore + 1, aScoreMap );
          }
          else
          {
-            visit( aMap, aX, aY - 1, "west", score + 1001, aScoreMap );
+            visit( aMap, aX, aY - 1, "west", aScore + 1001, aScoreMap );
          }
       }
    }
