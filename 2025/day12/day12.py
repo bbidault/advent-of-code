@@ -1,4 +1,4 @@
-# https://adventofcode.com/2025/day/11
+# https://adventofcode.com/2025/day/12
 
 import numpy as np
 
@@ -28,8 +28,8 @@ def compute(inputFilePath: str) -> tuple:
                 count += 1
             elif x * y >= sum(presents * sizes):
                 # otherwise, we need to pack them like Pentomino pieces,
-                # luckily this never happens ! (-‿-")
-                print("We're screwed!")
+                # luckily this never happens for the given input !
+                print("Need to fit the presents like Pentomino pieces!")
 
     return count
 
